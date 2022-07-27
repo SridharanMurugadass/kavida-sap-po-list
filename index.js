@@ -14,6 +14,17 @@ app.get('/sapAllPurchaseOrders', (request, response) => {
 	  response.json(syncClone.data)
 });
 
+app.get('/sapAllSupplierInfo', (request, response) => {
+	const syncClone=cmd.runSync("curl -k -L -s --compressed GET \
+	'https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata/sap/API_BUSINESS_PARTNER/A_SupplierCompany?$top=50&$inlinecount=allpages' \
+	-H 'accept: application/json' \
+	-H 'apikey: owAxYyE1uDOZa9LffLskasAYSFOMKEXJ' \
+	-H 'cache-control: no-cache' \
+	-H 'dataserviceversion: 2.0' \
+	-H 'postman-token: 8a7a8b16-143d-cea8-7e11-f5fe4f7ed640'");
+	  response.json(syncClone.data)
+});
+
 
 app.listen(process.env.PORT || 3000, () => console.log(`your app is up`));
 
